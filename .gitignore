@@ -10,6 +10,7 @@ bin-release/
 # Executables
 *.swf
 *.air
+node_modules/
 *.ipa
 *.apk
 

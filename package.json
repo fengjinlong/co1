@@ -1,0 +1,31 @@
+{
+  "name": "co1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fengjinlong/co1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fengjinlong/co1/issues"
+  },
+  "homepage": "https://github.com/fengjinlong/co1#readme",
+  "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-typescript": "^7.16.7",
+    "babel-jest": "^27.5.1",
+    "jest": "^27.5.1"
+  },
+  "dependencies": {
+    "@types/jest": "^27.4.1",
+    "@types/node": "^17.0.25"
+  }
+}
