@@ -63,5 +63,46 @@ test('compiling android goes as expected', () => {
   expect(() => compileAndroidCode()).toThrow(/JDK/);
 });
 ```
+7. expect.anything()
+- 除了 null 或未定义之外，任何匹配都可以
+- 使用它来代替文字值 toEqual 或 
+- toBeCalledWith(函数调用的参数)，检查一个 mock 函数是否使用非空参数调用
+
+```js
+test('map calls its argument with a non-null argument', () => {
+  const mock = jest.fn();
+  [1].map(x => mock(x));
+  expect(mock).toBeCalledWith(expect.anything());
+  expect(0).toEqual(expect.anything());
+});
+```
+
+8. expect.arrayContaining(array)
+- 所期望的数组是所接收数组的子集
+```js
+describe('arrayContaining', () => {
+  const expected = ['Alice', 'Bob'];
+  it('matches even if received contains additional elements', () => {
+    expect(['Alice', 'Bob', 'Eve']).toEqual(expect.arrayContaining(expected));
+  });
+  it('does not match if received does not contain expected elements', () => {
+    expect(['Bob', 'Eve']).not.toEqual(expect.arrayContaining(expected));
+  });
+});
+
+describe('Beware of a misunderstanding! describe('Beware of a misunderstanding! A sequence of dice rolls', () => {
+  const expected = [1, 2, 3, 4, 5, 6];
+  it('matches even with an unexpected number 7', () => {
+    expect([4, 1, 6, 7, 3, 5, 2, 5, 4, 6]).toEqual(
+      expect.arrayContaining(expected),
+    );
+  });
+  it('does not match without an expected number 2', () => {
+    expect([4, 1, 6, 7, 3, 5, 7, 5, 4, 6]).not.toEqual(
+      expect.arrayContaining(expected),
+    );
+  });
+});
+```
 
 https://jestjs.io/zh-Hans/docs/expect

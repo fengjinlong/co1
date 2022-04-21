@@ -47,40 +47,70 @@ describe("test", () => {
   });
 
   // 字符串
-  test('there is no I in team', () => {
+  test("there is no I in team", () => {
     // expect('team').not.toMatch(/t/);
-    expect('team').toMatch(/t/);
+    expect("team").toMatch(/t/);
   });
-  
+
   test('but there is a "stop" in Christoph', () => {
-    expect('Christoph').toMatch(/stop/);
+    expect("Christoph").toMatch(/stop/);
   });
 
   // 数组
   const shoppingList = [
-    'diapers',
-    'kleenex',
-    'trash bags',
-    'paper towels',
-    'milk',
+    "diapers",
+    "kleenex",
+    "trash bags",
+    "paper towels",
+    "milk",
   ];
-  
-  test('shoppingList数组中包含milk', () => {
-    expect(shoppingList).toContain('milk');
-    expect(new Set(shoppingList)).toContain('milk');
+
+  test("shoppingList数组中包含milk", () => {
+    expect(shoppingList).toContain("milk");
+    expect(new Set(shoppingList)).toContain("milk");
   });
 
   // error
   function compileAndroidCode() {
-    throw new Error('you are using the wrong JDK');
+    throw new Error("you are using the wrong JDK");
   }
-  
-  test('compiling android goes as expected', () => {
+
+  test("compiling android goes as expected", () => {
     expect(() => compileAndroidCode()).toThrow();
     expect(() => compileAndroidCode()).toThrow(Error);
-  
+
     // 你可以自己定义确切的错误消息内容或者使用正则表达式
-    expect(() => compileAndroidCode()).toThrow('you are using the wrong JDK');
+    expect(() => compileAndroidCode()).toThrow("you are using the wrong JDK");
     expect(() => compileAndroidCode()).toThrow(/JDK/);
+  });
+
+  test("map calls its argument with a non-null argument", () => {
+    const mock = jest.fn();
+    [1].map((x) => mock(x));
+    expect(mock).toBeCalledWith(expect.anything());
+    expect(0).toEqual(expect.anything());
+  });
+  describe("arrayContaining", () => {
+    const expected = ["Alice", "Bob"];
+    it("matches even if received contains additional elements", () => {
+      expect(["Alice", "Bob", "Eve"]).toEqual(expect.arrayContaining(expected));
+    });
+    it("does not match if received does not contain expected elements", () => {
+      expect(["Bob", "Eve"]).not.toEqual(expect.arrayContaining(expected));
+    });
+  });
+
+  describe('Beware', () => {
+    const expected = [1, 2, 3, 4, 5, 6];
+    it('matches even with an unexpected number 7', () => {
+      expect([4, 1, 6, 7, 3, 5, 2, 5, 4, 6]).toEqual(
+        expect.arrayContaining(expected),
+      );
+    });
+    it('does not match without an expected number 2', () => {
+      expect([4, 1, 6, 7, 3, 5, 7, 5, 4, 6]).not.toEqual(
+        expect.arrayContaining(expected),
+      );
+    });
   });
 });
