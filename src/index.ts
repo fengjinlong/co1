@@ -11,3 +11,7 @@ export function transver(num, flag) {
   }
   return arr.reverse().join("");
 }
+
+export function EventEmitter () {
+
+}
