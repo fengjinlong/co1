@@ -1,7 +1,6 @@
 import { fun } from "..";
 describe("test", () => {
   it("t", () => {
-    console.log(fun);
     expect(fun()).toBe(1);
     expect(2 + 2).toBe(4);
     expect([1]).toEqual([1]);
@@ -107,10 +106,21 @@ describe("test", () => {
         expect.arrayContaining(expected),
       );
     });
+    
     it('does not match without an expected number 2', () => {
       expect([4, 1, 6, 7, 3, 5, 7, 5, 4, 6]).not.toEqual(
         expect.arrayContaining(expected),
       );
     });
   });
+
+  function doAsync (f1,f2) {
+    setTimeout(() => {
+      f1(0)
+    }, 1000)
+    setTimeout(() => {
+      f2(1)
+    }, 2000)
+  }
+
 });
